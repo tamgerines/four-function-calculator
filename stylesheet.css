@@ -31,7 +31,7 @@
 	text-align: right;
 }
 
-.buttons {
+.row {
 	position: relative;
 	top: 10px;
 	height: 50px;
@@ -39,18 +39,17 @@
 	text-align: center;
 }
 
-.number {
+.button {
 	display: inline-block;
 	border-radius: 5px;
-	background-color: white;
 	height: 50px;
 	width: 50px;
 }
 
+.number {
+	background-color: white;
+}
+
 .operator {
-	display: inline-block;
-	border-radius: 5px;
 	background-color: red;
-	height: 50px;
-	width: 50px;
 }

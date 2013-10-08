@@ -9,36 +9,131 @@
 	<p id="subtitle">Tamara Instruments TI-055</p>
 
 	<div id="container">
-		<div id="display">58008</div>
-		<div class="buttons">
-			<span class="number" id="7">7</span>
-			<span class="number" id="8">8</span>
-			<span class="number" id="9">9</span>
-			<span class="operator" id="+">+</span>
+		<div id="display">0</div>
+		<div class="row">
+			<span class="number button" id="7">7</span>
+			<span class="number button" id="8">8</span>
+			<span class="number button" id="9">9</span>
+			<span class="operator button" id="+">+</span>
 		</div>
-		<div class="buttons">
-			<span class="number" id="4">4</span>
-			<span class="number" id="5">5</span>
-			<span class="number" id="6">6</span>
-			<span class="operator" id="-">-</span>
+		<div class="row">
+			<span class="number button" id="4">4</span>
+			<span class="number button" id="5">5</span>
+			<span class="number button" id="6">6</span>
+			<span class="operator button" id="-">-</span>
 		</div>
-		<div class="buttons">
-			<span class="number" id="1">1</span>
-			<span class="number" id="2">2</span>
-			<span class="number" id="3">3</span>
-			<span class="operator" id="*">*</span>
+		<div class="row">
+			<span class="number button" id="1">1</span>
+			<span class="number button" id="2">2</span>
+			<span class="number button" id="3">3</span>
+			<span class="operator button" id="*">*</span>
 		</div>
-		<div class="buttons">
-			<span class="operator" id="C">C</span>
-			<span class="number" id="0">0</span>
-			<span class="operator" id="=">=</span>
-			<span class="operator" id="/">/</span>
+		<div class="row">
+			<span class="operator button" id="C">C</span>
+			<span class="number button" id="0">0</span>
+			<span class="operator button" id="=">=</span>
+			<span class="operator button" id="/">/</span>
 		</div>
 	</div>
 <script type="text/javascript">
-	document.getElementById("=").onclick=function() {doIt()};
-	function doIt() {
-		document.getElementById("display").innerHTML="DUMBFACE!";
+	var buttons = document.getElementsByClassName("button");
+	for (var i=0; i<buttons.length; i++) {
+		buttons[i].addEventListener("click", handleButtonClick, false);
+	}
+	
+	var left = null;
+	var operator = null;
+	var right = null;
+	var result = null;
+	
+	function handleButtonClick(e) {
+		console.log(e); //for testing
+		if (e.target.className == "number button") {
+			handleNumber(e.target.id);
+		}
+		else {
+			handleOperator(e.target.id);
+		}
+	}
+	
+	function handleNumber(num) {
+		if (left == null) {
+			//store left
+			left = num;
+			document.getElementById("display").innerText = left;
+		}
+		else if (operator == null) {
+			//concatenate left
+			left += num;
+			document.getElementById("display").innerText = left;
+		}
+		else if (right == null) {
+			//store right
+			right = num;
+			document.getElementById("display").innerText = right;
+		}
+		else {
+			//concatenate right
+			right += num;
+			document.getElementById("display").innerText = right;
+		}
+	}
+	
+	function handleOperator(op) {
+		switch (op) {
+			case "C":
+				left = null;
+				operator = null;
+				right = null;
+				document.getElementById("display").innerText = "0";
+				break;
+			case "=":
+				if (right != null) {
+					//evaluate
+					evaluate();
+					left = result;
+					operator = null;
+					right = null;
+				}
+				break;
+			default:
+				if (left == null) {
+					//store 0 in left and store operator
+					left = 0;
+					operator = op;
+				}
+				else if (right != null) { //multiple operations
+					evaluate();
+					left = result;
+					operator = op;
+					right = null;
+				}
+				else {
+					//store operator
+					operator = op;
+				}
+				break;
+		}
+	}
+	
+	function evaluate() {
+		switch (operator) {
+			case "+":
+				result = Number(left) + Number(right);
+				break;
+			case "-":
+				result = left - right;
+				break;
+			case "*":
+				result = left * right;
+				break;
+			case "/":
+				result = left / right;
+				break;
+			default:
+				break;
+		}
+		document.getElementById("display").innerText = result;
 	}
 </script>
 </body>
