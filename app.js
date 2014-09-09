@@ -98,61 +98,63 @@ function evaluate() {
 	document.getElementById("display").innerText = result;
 }
 
-$(document).keypress(function(event) {
-	console.log(event); //for testing
-	switch (event.which) {
-		case 48:
-			handleNumber("0");
-			break;
-		case 49:
-			handleNumber("1");
-			break;
-		case 50:
-			handleNumber("2");
-			break;
-		case 51:
-			handleNumber("3");
-			break;
-		case 52:
-			handleNumber("4");
-			break;
-		case 53:
-			handleNumber("5");
-			break;
-		case 54:
-			handleNumber("6");
-			break;
-		case 55:
-			handleNumber("7");
-			break;
-		case 56:
-			handleNumber("8");
-			break;
-		case 57:
-			handleNumber("9");
-			break;
-		case 43:
-			handleOperator("+");
-			break;
-		case 45:
-			handleOperator("-");
-			break;
-		case 42:
-			handleOperator("*");
-			break;
-		case 47:
-			handleOperator("/");
-			break;
-		case 61:
-			handleOperator("=");
-			break;
-		case 13: //enter
-			handleOperator("=");
-			break;
-		case 99: //lowercase c
-			handleOperator("C");
-			break;
-		default:
-			break;
-	}
+$(document).ready(function() {
+	$(document).keypress(function(event) {
+		console.log(event); //for testing
+		switch (event.which) {
+			case 48:
+				handleNumber("0");
+				break;
+			case 49:
+				handleNumber("1");
+				break;
+			case 50:
+				handleNumber("2");
+				break;
+			case 51:
+				handleNumber("3");
+				break;
+			case 52:
+				handleNumber("4");
+				break;
+			case 53:
+				handleNumber("5");
+				break;
+			case 54:
+				handleNumber("6");
+				break;
+			case 55:
+				handleNumber("7");
+				break;
+			case 56:
+				handleNumber("8");
+				break;
+			case 57:
+				handleNumber("9");
+				break;
+			case 43:
+				handleOperator("+");
+				break;
+			case 45:
+				handleOperator("-");
+				break;
+			case 42:
+				handleOperator("*");
+				break;
+			case 47:
+				handleOperator("/");
+				break;
+			case 61:
+				handleOperator("=");
+				break;
+			case 13: //enter
+				handleOperator("=");
+				break;
+			case 99: //lowercase c
+				handleOperator("C");
+				break;
+			default:
+				break;
+		}
+	});
 });
