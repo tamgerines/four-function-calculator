@@ -1,6 +1,8 @@
 ## Four Function Calculator
 pays homage to the ubiquitous blue calculators of elementary school
 
+<img src="https://dl.dropboxusercontent.com/u/9814535/calculator.png">
+
 ## How It Works
 - use mouse or keyboard to input numbers and operators to perform simple arithmetic
 - keyboard shortcuts:
